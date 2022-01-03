@@ -1,0 +1,31 @@
+{
+  "name": "tomoscript-todos-cli",
+  "version": "1.0.0",
+  "description": "CLI app used to manage tasks",
+  "main": "app.ts",
+  "scripts": {
+    "lint:types": "tsc",
+    "start": "ts-node app.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MiguelAraCo/TomoScript-todos-cli.git"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/MiguelAraCo/TomoScript-todos-cli/issues"
+  },
+  "homepage": "https://github.com/MiguelAraCo/TomoScript-todos-cli#readme",
+  "devDependencies": {
+    "prettier": "^2.5.1"
+  },
+  "dependencies": {
+    "@types/node": "^17.0.6",
+    "@types/yargs": "^17.0.8",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.4",
+    "yargs": "^17.3.1"
+  }
+}
