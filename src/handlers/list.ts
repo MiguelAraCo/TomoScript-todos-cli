@@ -9,10 +9,15 @@ export namespace ListHandler {
   const taskData = "data/db.json";
 
   export const handle = async (args: Args): Promise<void> => {
-    const data = await readFile(taskData);
-    const stringContent = data.toString();
-    const taskObjects: Array<Task> = JSON.parse(stringContent);
-
+    let taskObjects: Array<Task>;
+    try {
+      const data = await readFile(taskData);
+      const stringContent = data.toString();
+      taskObjects = JSON.parse(stringContent);
+    } catch (e: unknown) {
+      console.error("Error! We couldn't read the file...");
+      return;
+    }
     const taskStrings: Array<string> = taskObjects.map((task) => {
       if (task.done) {
         return `[x] ${task.description}`;
@@ -21,7 +26,6 @@ export namespace ListHandler {
       }
     });
     for (const eachTask of taskStrings) {
-      eachTask.length;
       console.log(eachTask);
     }
   };
