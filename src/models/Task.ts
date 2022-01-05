@@ -1,3 +1,5 @@
 export interface Task {
-  // TODO
+  // TODO: due date
+  description: string;
+  done: boolean;
 }
