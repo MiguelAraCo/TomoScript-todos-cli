@@ -40,6 +40,7 @@ async function main(): Promise<void> {
           all: {
             boolean: true,
             describe: "If provided, list all tasks (even the ones marked as completed)",
+            default: false,
           },
         }),
       // If the user specified the 'list' command, this function will be executed
