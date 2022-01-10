@@ -9,24 +9,34 @@ export namespace ListHandler {
   const taskData = "data/db.json";
 
   export const handle = async (args: Args): Promise<void> => {
-    let taskObjects: Array<Task>;
+    let allTasks: Array<Task>;
     try {
       const data = await readFile(taskData);
       const stringContent = data.toString();
-      taskObjects = JSON.parse(stringContent);
+      allTasks = JSON.parse(stringContent);
     } catch (e: unknown) {
       console.error("Error! We couldn't read the file...");
       return;
     }
-    const taskStrings: Array<string> = taskObjects.map((task) => {
+
+    const pendingTasks = allTasks.filter((task) => {
+      return !task.done;
+    });
+
+    // Using the ternary operator
+    const tasksToPrint: Array<Task> = args.all ? allTasks : pendingTasks;
+
+    // map function : changing Array<string> to Array <string> + [] or [x]
+    const taskStrings: Array<string> = tasksToPrint.map((task) => {
       if (task.done) {
         return `[x] ${task.description}`;
       } else {
         return `[ ] ${task.description}`;
       }
     });
-    for (const eachTask of taskStrings) {
-      console.log(eachTask);
+
+    for (const taskString of taskStrings) {
+      console.log(taskString);
     }
   };
 }
