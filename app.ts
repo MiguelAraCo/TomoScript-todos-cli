@@ -1,4 +1,4 @@
-#!./node_modules/.bin ts-node
+#!/usr/bin/env ts-node
 
 import yargs from "yargs/yargs";
 import { askQuestion } from "./src/utils/askQuestion";
@@ -61,6 +61,7 @@ async function main(): Promise<void> {
       // If the user specified the 'add' command, this function will be executed
       handler: AddHandler.handle,
     } as CommandModule<{}, AddHandler.Args>)
+    .help()
     .parse(args);
 }
 
