@@ -3,7 +3,7 @@
 import yargs from "yargs/yargs";
 import { askQuestion } from "./src/utils/askQuestion";
 import { ListHandler } from "./src/handlers/list";
-import { CommandModule } from "yargs";
+import { CommandModule, demandOption } from "yargs";
 import { AddHandler } from "./src/handlers/add";
 
 /**
@@ -57,6 +57,10 @@ async function main(): Promise<void> {
             describe: "Description of the task",
             demandOption: true,
           },
+          by: {
+            type: "string",
+            describe: "due date of the task",
+          }
         }),
       // If the user specified the 'add' command, this function will be executed
       handler: AddHandler.handle,

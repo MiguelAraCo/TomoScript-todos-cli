@@ -4,12 +4,17 @@ import { getTasks, saveTasks } from "../services/tasks";
 export namespace AddHandler {
   export type Args = {
     description: string;
+    by: string | undefined;
   };
 
   export const handle = async (args: Args): Promise<void> => {
+    // TODO: Add validation
+
     let allTasks: Array<Task> = await getTasks();
 
-    allTasks.push({ done: false, description: args.description });
+    const by = args.by ? new Date(args.by).toISOString() : undefined;
+
+    allTasks.push({ done: false, description: args.description, by: by });
 
     await saveTasks(allTasks);
 
