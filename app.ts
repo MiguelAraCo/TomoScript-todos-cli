@@ -59,7 +59,7 @@ async function main(): Promise<void> {
           },
           by: {
             type: "string",
-            describe: "due date of the task",
+            describe: "Due date of the task",
           }
         }),
       // If the user specified the 'add' command, this function will be executed
