@@ -4,7 +4,7 @@ import { getTasks, saveTasks } from "../services/tasks";
 export namespace AddHandler {
   export type Args = {
     description: string;
-    by: string | undefined;
+    by?: string;
   };
 
   export const handle = async (args: Args): Promise<void> => {
