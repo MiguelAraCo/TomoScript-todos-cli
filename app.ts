@@ -52,6 +52,10 @@ async function main(): Promise<void> {
       builder: (yargs) =>
         // Configuration for the options the 'add' command accepts
         yargs.options({
+          id: {
+            type: "string",
+            describe: "Id of each task",
+          },
           description: {
             type: "string",
             describe: "Description of the task",
@@ -60,7 +64,11 @@ async function main(): Promise<void> {
           by: {
             type: "string",
             describe: "Due date of the task",
-          }
+          },
+          // edit: {
+          //   type: "string",
+          //   describe: "Modify an existing task",
+          // }
         }),
       // If the user specified the 'add' command, this function will be executed
       handler: AddHandler.handle,
