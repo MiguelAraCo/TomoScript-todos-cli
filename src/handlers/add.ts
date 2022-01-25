@@ -7,7 +7,6 @@ export namespace AddHandler {
     id: string;
     description: string;
     by?: string;
-    // edit: string;
   };
 
   export const handle = async (args: Args): Promise<void> => {

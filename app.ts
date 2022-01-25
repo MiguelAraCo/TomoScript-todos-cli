@@ -65,10 +65,6 @@ async function main(): Promise<void> {
             type: "string",
             describe: "Due date of the task",
           },
-          // edit: {
-          //   type: "string",
-          //   describe: "Modify an existing task",
-          // }
         }),
       // If the user specified the 'add' command, this function will be executed
       handler: AddHandler.handle,
