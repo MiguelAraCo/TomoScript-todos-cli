@@ -3,8 +3,9 @@
 import yargs from "yargs/yargs";
 import { askQuestion } from "./src/utils/askQuestion";
 import { ListHandler } from "./src/handlers/list";
-import { CommandModule, demandOption } from "yargs";
+import { boolean, CommandModule, demandOption } from "yargs";
 import { AddHandler } from "./src/handlers/add";
+import { EditHandler } from "./src/handlers/edit";
 
 /**
  * If the user provided arguments when executing the application this function
@@ -69,6 +70,33 @@ async function main(): Promise<void> {
       // If the user specified the 'add' command, this function will be executed
       handler: AddHandler.handle,
     } as CommandModule<{}, AddHandler.Args>)
+    .command({
+      command: "edit",
+      describe: "Edit an existing task",
+      builder: (yargs) =>
+        // Configuration for the options the 'edit' command accepts
+        yargs.options({
+          //TODO: figure out what to put for a $TASK_ID part
+          done: {
+            boolean: true,
+            describe: "Task is complete",
+          },
+          pending: {
+            boolean: false,
+            describe: "Task is not complete",
+          },
+          description: {
+            type: "string",
+            describe: "Description of the task",
+          },
+          by:{
+            type: "string",
+            describe: "Due date of the task"
+          }
+        }),
+      // If the user specified the 'edit' command, this function will be executed
+      handler: EditHandler.handle,
+    } as CommandModule<{}, EditHandler.Args>)
     .help()
     .parse(args);
 }
