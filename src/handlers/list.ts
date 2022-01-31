@@ -10,9 +10,9 @@ export namespace ListHandler {
   function formatTasks(tasks: Array<Task>) {
     const taskStrings: Array<string> = tasks.map((task) => {
       if (task.done && task.by) {
-        return ` [x] ${task.description}` + ` (ID: ${nanoid()})`+ ` by: ${new Date(task.by).toLocaleDateString()}`;
+        return ` [x] ${task.description}` + ` by: ${new Date(task.by).toLocaleDateString()}` + ` (ID: ${nanoid()})`;
       } else if (!task.done && task.by) {
-        return ` [ ] ${task.description}` + ` (ID: ${nanoid()})`+ ` by: ${new Date(task.by).toLocaleDateString()}`;
+        return ` [ ] ${task.description}` + ` by: ${new Date(task.by).toLocaleDateString()}` + ` (ID: ${nanoid()})`;
       } else if (task.done) {
         return ` [x] ${task.description}` + ` (ID: ${nanoid()})`;
       } else {

@@ -77,6 +77,10 @@ async function main(): Promise<void> {
         // Configuration for the options the 'edit' command accepts
         yargs.options({
           //TODO: figure out what to put for a $TASK_ID part
+          id: {
+            type: "string",
+            describe: "Id of each task"
+          },
           done: {
             boolean: true,
             describe: "Task is complete",

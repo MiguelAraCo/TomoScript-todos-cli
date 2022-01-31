@@ -11,14 +11,12 @@ export namespace AddHandler {
 
   export const handle = async (args: Args): Promise<void> => {
     // TODO: Add validation
-
     const id = nanoid();
 
     let allTasks: Array<Task> = await getTasks();
 
     const by = args.by ? new Date(args.by).toISOString() : undefined;
 
-    // TODO: Change done to be able to choose whether done or pending
     allTasks.push({ id: id, done: false, description: args.description, by: by });
 
     await saveTasks(allTasks);
