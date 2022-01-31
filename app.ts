@@ -86,7 +86,7 @@ async function main(): Promise<void> {
             describe: "Task is complete",
           },
           pending: {
-            boolean: false,
+            boolean: true,
             describe: "Task is not complete",
           },
           description: {

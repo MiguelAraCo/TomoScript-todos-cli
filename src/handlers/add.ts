@@ -4,7 +4,6 @@ import { nanoid } from "nanoid";
 
 export namespace AddHandler {
   export type Args = {
-    id: string;
     description: string;
     by?: string;
   };
