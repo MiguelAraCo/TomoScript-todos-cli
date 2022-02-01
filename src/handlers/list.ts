@@ -1,6 +1,5 @@
 import { Task } from "../models/Task";
 import { getTasks } from "../services/tasks";
-import { nanoid } from "nanoid";
 
 export namespace ListHandler {
   export type Args = {
@@ -10,13 +9,13 @@ export namespace ListHandler {
   function formatTasks(tasks: Array<Task>) {
     const taskStrings: Array<string> = tasks.map((task) => {
       if (task.done && task.by) {
-        return ` [x] ${task.description}` + ` by: ${new Date(task.by).toLocaleDateString()}` + ` (ID: ${nanoid()})`;
+        return ` [x] ${task.description}` + ` by: ${new Date(task.by).toLocaleDateString()}` + ` (ID: ${task.id})`;
       } else if (!task.done && task.by) {
-        return ` [ ] ${task.description}` + ` by: ${new Date(task.by).toLocaleDateString()}` + ` (ID: ${nanoid()})`;
+        return ` [ ] ${task.description}` + ` by: ${new Date(task.by).toLocaleDateString()}` + ` (ID: ${task.id})`;
       } else if (task.done) {
-        return ` [x] ${task.description}` + ` (ID: ${nanoid()})`;
+        return ` [x] ${task.description}` + ` (ID: ${task.id})`;
       } else {
-        return ` [ ] ${task.description}` + ` (ID: ${nanoid()})`;
+        return ` [ ] ${task.description}` + ` (ID: ${task.id})`;
       }
     });
     return taskStrings;
