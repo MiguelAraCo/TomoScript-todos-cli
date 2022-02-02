@@ -15,11 +15,7 @@ export namespace EditHandler {
     let allTasks: Array<Task> = await getTasks();
 
     let task: Task | undefined = allTasks.find((task) => task.id === args.id);
-    // Same as:
-    // let task: Task | undefined = allTasks.find((task) => task.id === args.id);
-    // let task: Task | undefined = allTasks.find(({ id }) => {
-    //   return id === args.id;
-    // });
+
     if (task === undefined) {
       console.error("This ID does not exist. Please type valid ID!");
       process.exit(1);
