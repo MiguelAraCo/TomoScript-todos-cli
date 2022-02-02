@@ -27,8 +27,11 @@ export namespace EditHandler {
 
     task.description = args.description;
     task.by = args.by;
-    if(args.done && args.pending){
-     // FIXME: Throw error
+
+
+    if(args.done && args.pending) {
+      console.error("Error! Please choose either `done` or `pending`.")
+      process.exit(1);
     } else if(args.done) {
       task.done = true;
     } else if(args.pending) {
