@@ -28,7 +28,6 @@ export namespace EditHandler {
     task.description = args.description;
     task.by = args.by;
 
-
     if(args.done && args.pending) {
       console.error("Error! Please choose either `done` or `pending`.")
       process.exit(1);
