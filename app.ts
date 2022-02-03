@@ -3,8 +3,9 @@
 import yargs from "yargs/yargs";
 import { askQuestion } from "./src/utils/askQuestion";
 import { ListHandler } from "./src/handlers/list";
-import { CommandModule, demandOption } from "yargs";
+import { boolean, CommandModule, demandOption } from "yargs";
 import { AddHandler } from "./src/handlers/add";
+import { EditHandler } from "./src/handlers/edit";
 
 /**
  * If the user provided arguments when executing the application this function
@@ -52,6 +53,10 @@ async function main(): Promise<void> {
       builder: (yargs) =>
         // Configuration for the options the 'add' command accepts
         yargs.options({
+          id: {
+            type: "string",
+            describe: "Id of each task",
+          },
           description: {
             type: "string",
             describe: "Description of the task",
@@ -60,11 +65,42 @@ async function main(): Promise<void> {
           by: {
             type: "string",
             describe: "Due date of the task",
-          }
+          },
         }),
       // If the user specified the 'add' command, this function will be executed
       handler: AddHandler.handle,
     } as CommandModule<{}, AddHandler.Args>)
+    .command({
+      command: "edit",
+      describe: "Edit an existing task",
+      builder: (yargs) =>
+        // Configuration for the options the 'edit' command accepts
+        yargs.options({
+          id: {
+            type: "string",
+            describe: "Id of each task",
+            demandOption: true,
+          },
+          done: {
+            boolean: true,
+            describe: "Task is complete",
+          },
+          pending: {
+            boolean: true,
+            describe: "Task is not complete",
+          },
+          description: {
+            type: "string",
+            describe: "Description of the task",
+          },
+          by:{
+            type: "string",
+            describe: "Due date of the task"
+          }
+        }),
+      // If the user specified the 'edit' command, this function will be executed
+      handler: EditHandler.handle,
+    } as CommandModule<{}, EditHandler.Args>)
     .help()
     .parse(args);
 }
