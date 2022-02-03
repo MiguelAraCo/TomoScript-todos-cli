@@ -9,13 +9,13 @@ export namespace ListHandler {
   function formatTasks(tasks: Array<Task>) {
     const taskStrings: Array<string> = tasks.map((task) => {
       if (task.done && task.by) {
-        return ` [x] ${task.description}` + ` by: ${new Date(task.by).toLocaleDateString()}` + ` (ID: ${task.id})`;
+        return `[x] ${task.description}` + ` (by: ${new Date(task.by).toLocaleDateString()})`;
       } else if (!task.done && task.by) {
-        return ` [ ] ${task.description}` + ` by: ${new Date(task.by).toLocaleDateString()}` + ` (ID: ${task.id})`;
+        return `[ ] ${task.description}` + ` (by: ${new Date(task.by).toLocaleDateString()})`;
       } else if (task.done) {
-        return ` [x] ${task.description}` + ` (ID: ${task.id})`;
+        return `[x] ${task.description}`;
       } else {
-        return ` [ ] ${task.description}` + ` (ID: ${task.id})`;
+        return `[ ] ${task.description}`;
       }
     });
     return taskStrings;
