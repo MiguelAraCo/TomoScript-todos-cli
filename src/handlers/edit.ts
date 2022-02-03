@@ -31,7 +31,7 @@ export namespace EditHandler {
 
     //When user types a due date, it becomes a new due date
     if (typeof args.by === "string") {
-      task.by = args.by;
+      task.by = new Date(args.by).toISOString()
     }
 
     // When user type done and pending, it shows an error message. If the user type 'done', [x], and 'pending' would be [ ]
