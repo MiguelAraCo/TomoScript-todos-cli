@@ -32,7 +32,6 @@ export namespace ListHandler {
 
     const taskStrings = formatTasks(tasksToPrint);
 
-    // TODO: Make a separate function
     for (const taskString of taskStrings) {
       console.log(taskString);
     }
