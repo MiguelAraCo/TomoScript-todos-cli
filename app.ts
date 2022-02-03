@@ -78,7 +78,8 @@ async function main(): Promise<void> {
         yargs.options({
           id: {
             type: "string",
-            describe: "Id of each task"
+            describe: "Id of each task",
+            demandOption: true,
           },
           done: {
             boolean: true,
