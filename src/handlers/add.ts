@@ -12,7 +12,7 @@ export namespace AddHandler {
     // TODO: Add validation
 
     const id = nanoid();
-    let allTasks: Array<Task> = await getTasks();
+    const allTasks: Array<Task> = await getTasks();
     const by = args.by ? new Date(args.by).toISOString() : undefined;
 
     allTasks.push({ id: id, done: false, description: args.description, by: by });

@@ -11,7 +11,7 @@ export namespace EditHandler {
   };
 
   export const handle = async (args: Args): Promise<void> => {
-    let allTasks: Array<Task> = await getTasks();
+    const allTasks: Array<Task> = await getTasks();
 
     let task: Task | undefined = allTasks.find((task) => task.id === args.id);
 

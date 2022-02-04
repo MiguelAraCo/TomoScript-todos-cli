@@ -22,7 +22,7 @@ export namespace ListHandler {
   }
 
   export const handle = async (args: Args): Promise<void> => {
-    let allTasks: Array<Task> = await getTasks();
+    const allTasks: Array<Task> = await getTasks();
 
     const pendingTasks = allTasks.filter((task) => {
       return !task.done;
