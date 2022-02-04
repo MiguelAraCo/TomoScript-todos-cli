@@ -9,20 +9,20 @@ export namespace ListHandler {
   function formatTasks(tasks: Array<Task>) {
     const taskStrings: Array<string> = tasks.map((task) => {
       if (task.done && task.by) {
-        return `[x] ${task.description}` + ` (by: ${new Date(task.by).toLocaleDateString()})`;
+        return ` [x] ${task.description}` + ` by: ${new Date(task.by).toLocaleDateString()}` + ` (ID: ${task.id})`;
       } else if (!task.done && task.by) {
-        return `[ ] ${task.description}` + ` (by: ${new Date(task.by).toLocaleDateString()})`;
+        return ` [ ] ${task.description}` + ` by: ${new Date(task.by).toLocaleDateString()}` + ` (ID: ${task.id})`;
       } else if (task.done) {
-        return `[x] ${task.description}`;
+        return ` [x] ${task.description}` + ` (ID: ${task.id})`;
       } else {
-        return `[ ] ${task.description}`;
+        return ` [ ] ${task.description}` + ` (ID: ${task.id})`;
       }
     });
     return taskStrings;
   }
 
   export const handle = async (args: Args): Promise<void> => {
-    let allTasks: Array<Task> = await getTasks();
+    const allTasks: Array<Task> = await getTasks();
 
     const pendingTasks = allTasks.filter((task) => {
       return !task.done;
@@ -32,7 +32,6 @@ export namespace ListHandler {
 
     const taskStrings = formatTasks(tasksToPrint);
 
-    // TODO: Make a separate function
     for (const taskString of taskStrings) {
       console.log(taskString);
     }
