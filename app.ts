@@ -6,6 +6,7 @@ import { ListHandler } from "./src/handlers/list";
 import { boolean, CommandModule, demandOption } from "yargs";
 import { AddHandler } from "./src/handlers/add";
 import { EditHandler } from "./src/handlers/edit";
+import { DeleteHandler } from "./src/handlers/delete";
 
 /**
  * If the user provided arguments when executing the application this function
@@ -101,6 +102,37 @@ async function main(): Promise<void> {
       // If the user specified the 'edit' command, this function will be executed
       handler: EditHandler.handle,
     } as CommandModule<{}, EditHandler.Args>)
+    .command({
+      command: "delete",
+      describe: "Delete a task",
+      builder: (yargs) =>
+        // Configuration for the options the 'add' command accepts
+        yargs.options({
+          id: {
+            type: "string",
+            describe: "Id of each task",
+            demandOption: true,
+          },
+          description: {
+            type: "string",
+            describe: "Description of the task",
+          },
+          done: {
+            boolean: true,
+            describe: "Task is complete",
+          },
+          pending: {
+            boolean: true,
+            describe: "Task is not complete",
+          },
+          by: {
+            type: "string",
+            describe: "Due date of the task",
+          },
+        }),
+      // If the user specified the 'add' command, this function will be executed
+      handler: DeleteHandler.handle,
+    } as CommandModule<{}, DeleteHandler.Args>)
     .help()
     .parse(args);
 }
