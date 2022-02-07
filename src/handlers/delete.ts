@@ -13,19 +13,14 @@ export namespace DeleteHandler {
   export const handle = async (args: Args): Promise<void> => {
     const allTasks: Array<Task> = await getTasks();
 
+    const index: number = allTasks.findIndex((task) => task.id === args.id);
 
-    const task: Task | undefined = allTasks.find((task) => task.id === args.id);
+    if (index === -1) {
+      console.error("This ID does not exist. Please type valid ID!");
+      process.exit(1);
+    }
 
-      if (task === undefined) {
-        console.error("This ID does not exist. Please type valid ID!");
-        process.exit(1);
-      }
-
-      if (task !== undefined) {
-        const index = allTasks.indexOf(task);
-        console.log(index);
-        allTasks.splice(index, 1);
-      }
+    allTasks.splice(index, 1);
 
     await saveTasks(allTasks);
   };
