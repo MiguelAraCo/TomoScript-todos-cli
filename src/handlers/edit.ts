@@ -24,8 +24,11 @@ export namespace EditHandler {
       task.description = args.description;
     }
 
-    if (typeof args.by === "string") {
+    if (typeof args.by === "string")
+    try {
       task.by = new Date(args.by).toISOString();
+    } catch (e:unknown) {
+      console.error("Oops! Please type valid date")
     }
 
     if (args.done && args.pending) {
