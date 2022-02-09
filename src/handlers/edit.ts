@@ -28,7 +28,8 @@ export namespace EditHandler {
     try {
       task.by = new Date(args.by).toISOString();
     } catch (e:unknown) {
-      console.error("Oops! Please type valid date")
+      console.error("Oops! Please type valid date");
+      process.exit(1);
     }
 
     if (args.done && args.pending) {
