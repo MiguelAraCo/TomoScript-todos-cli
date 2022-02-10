@@ -10,18 +10,15 @@ export async function getTasks(): Promise<Array<Task>> {
     return JSON.parse(stringContent);
   } catch (e: unknown) {
     console.error("Error! We couldn't read the file...");
-    // TODO: Throw a custom error instead
     process.exit(1);
   }
 }
 
-export async function saveTasks(tasks:Array<Task>):Promise<void> {
+export async function saveTasks(tasks: Array<Task>): Promise<void> {
   try {
     await writeFile(tasksFile, JSON.stringify(tasks));
-  } catch (e: unknown){
-    console.error("Oops! We couldn't save..")
+  } catch (e: unknown) {
+    console.error("Oops! We couldn't save..");
     process.exit(1);
   }
 }
-
-

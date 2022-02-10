@@ -13,7 +13,7 @@ export namespace EditHandler {
   export const handle = async (args: Args): Promise<void> => {
     const allTasks: Array<Task> = await getTasks();
 
-    let task: Task | undefined = allTasks.find((task) => task.id === args.id);
+    const task: Task | undefined = allTasks.find((task) => task.id === args.id);
 
     if (task === undefined) {
       console.error("This ID does not exist. Please type valid ID!");
@@ -25,7 +25,12 @@ export namespace EditHandler {
     }
 
     if (typeof args.by === "string") {
-      task.by = new Date(args.by).toISOString();
+      try {
+        task.by = new Date(args.by).toISOString();
+      } catch (e: unknown) {
+        console.error("Oops! Please type valid date");
+        process.exit(1);
+      }
     }
 
     if (args.done && args.pending) {

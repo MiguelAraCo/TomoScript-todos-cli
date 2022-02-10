@@ -6,6 +6,7 @@ import { ListHandler } from "./src/handlers/list";
 import { boolean, CommandModule, demandOption } from "yargs";
 import { AddHandler } from "./src/handlers/add";
 import { EditHandler } from "./src/handlers/edit";
+import { DeleteHandler } from "./src/handlers/delete";
 
 /**
  * If the user provided arguments when executing the application this function
@@ -36,7 +37,6 @@ async function main(): Promise<void> {
       command: "list",
       describe: "List available tasks",
       builder: (yargs) =>
-        // Configuration for the options the 'list' command accepts
         yargs.options({
           all: {
             boolean: true,
@@ -44,14 +44,12 @@ async function main(): Promise<void> {
             default: false,
           },
         }),
-      // If the user specified the 'list' command, this function will be executed
       handler: ListHandler.handle,
     } as CommandModule<{}, ListHandler.Args>)
     .command({
       command: "add",
       describe: "Adds a task",
       builder: (yargs) =>
-        // Configuration for the options the 'add' command accepts
         yargs.options({
           id: {
             type: "string",
@@ -67,14 +65,12 @@ async function main(): Promise<void> {
             describe: "Due date of the task",
           },
         }),
-      // If the user specified the 'add' command, this function will be executed
       handler: AddHandler.handle,
     } as CommandModule<{}, AddHandler.Args>)
     .command({
       command: "edit",
       describe: "Edit an existing task",
       builder: (yargs) =>
-        // Configuration for the options the 'edit' command accepts
         yargs.options({
           id: {
             type: "string",
@@ -98,9 +94,37 @@ async function main(): Promise<void> {
             describe: "Due date of the task"
           }
         }),
-      // If the user specified the 'edit' command, this function will be executed
       handler: EditHandler.handle,
     } as CommandModule<{}, EditHandler.Args>)
+    .command({
+      command: "delete",
+      describe: "Delete a task",
+      builder: (yargs) =>
+        yargs.options({
+          id: {
+            type: "string",
+            describe: "Id of each task",
+            demandOption: true,
+          },
+          description: {
+            type: "string",
+            describe: "Description of the task",
+          },
+          done: {
+            boolean: true,
+            describe: "Task is complete",
+          },
+          pending: {
+            boolean: true,
+            describe: "Task is not complete",
+          },
+          by: {
+            type: "string",
+            describe: "Due date of the task",
+          },
+        }),
+      handler: DeleteHandler.handle,
+    } as CommandModule<{}, DeleteHandler.Args>)
     .help()
     .parse(args);
 }
