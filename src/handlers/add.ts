@@ -13,9 +13,14 @@ export namespace AddHandler {
 
     const id = nanoid();
     const allTasks: Array<Task> = await getTasks();
-    const by = args.by ? new Date(args.by).toISOString() : undefined;
 
-    allTasks.push({ id: id, done: false, description: args.description, by: by });
+    try {
+      const by = args.by ? new Date(args.by).toISOString() : undefined;
+    } catch (e: unknown) {
+      console.error("Oops! Please type valid date");
+      process.exit(1);
+    }
+    allTasks.push({ id: id, done: false, description: args.description, by: args.by });
 
     await saveTasks(allTasks);
     console.log("Finished adding a new task!");
