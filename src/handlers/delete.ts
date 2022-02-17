@@ -4,10 +4,6 @@ import { getTasks, saveTasks } from "../services/tasks";
 export namespace DeleteHandler {
   export type Args = {
     id: string;
-    done: boolean;
-    pending: boolean;
-    description?: string;
-    by?: string;
   };
 
   export const handle = async (args: Args): Promise<void> => {
